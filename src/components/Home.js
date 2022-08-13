@@ -31,7 +31,13 @@ const Home = (props) => {
 const Container = styled.div`
     padding: 52px;
     max-width: 100%;
-
+    @media(max-width: 768px){
+        padding-top: 52px;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 12px;
+        max-width: 100%;
+    }
 
 `;
 
