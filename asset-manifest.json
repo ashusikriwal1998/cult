@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cult/static/css/main.29925316.css",
+    "main.js": "/cult/static/js/main.8025ec4f.js",
+    "index.html": "/cult/index.html",
+    "main.29925316.css.map": "/cult/static/css/main.29925316.css.map",
+    "main.8025ec4f.js.map": "/cult/static/js/main.8025ec4f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.29925316.css",
+    "static/js/main.8025ec4f.js"
+  ]
+}
