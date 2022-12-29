@@ -10,13 +10,7 @@ const Home = (props) => {
 
         <Container>
         {!props.user && <Navigate to='/' />}
-            <Section>
-                <h5>
-                   <a>Hiring in hurry? - </a>
-                </h5>
-                <p>Find talnted pros in record time with Upwork and keep business moving.</p>
-
-            </Section>
+            
 
             <Layout>
                 <Leftside/>
@@ -33,8 +27,8 @@ const Container = styled.div`
     max-width: 100%;
     @media(max-width: 768px){
         padding-top: 52px;
-        padding-left: 2px;
-        padding-right: 2px;
+        padding-left: 1px;
+        padding-right: 1px;
         padding-bottom: 12px;
         max-width: 100%;
     }

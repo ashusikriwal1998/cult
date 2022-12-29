@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import signInWithGoogle from "../firebase";
+import signInWithGoogle, { signInWithFb } from "../firebase";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const Login = (props) => {
                 }
             <Nav>
                 <a href="/">
-                    <img src="/images/login-logo.svg" alt="" />
+                    {/* <img src="/images/login-logo.svg" alt="" /> */}
                 </a>
                 <div>
                     <Join>
@@ -28,14 +28,21 @@ const Login = (props) => {
             </Nav>
             <Section>
                 <Hero>
-                    <h1>Welcome to your Professional Community</h1>
+                    <h1>Welcome to your Community</h1>
                     <img src="/images/login-hero.svg" alt="" />
                 </Hero>
+                
                 <Form>
                     <Google onClick={() => props.signIn()}>
                         <img src="/images/google.svg" alt="" />
                         Sign in with Google
                     </Google>
+                    {/* <Google onClick={() => props.signInFb()}>
+                        <img src="/images/google.svg" alt="" />
+                        Sign in with Facebook
+                        {console.log(props.user)}
+                    </Google> */}
+                    
                 </Form>
             </Section>
         </Container>
@@ -44,6 +51,12 @@ const Login = (props) => {
 
 const Container = styled.div`
     padding: 0px;
+    background-image: url(../images/grnd.svg) ;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    
 `;
 const Nav = styled.nav`
     max-width: 1128px;
@@ -172,6 +185,7 @@ const Google = styled.button`
     transition-duration: 167ms;
     font-size: 20px;
     color: rgba(0,0,0,0.6);
+    border: none;
     &:hover{
         background-color: rgba(207,207,207,0.25);
         color: rgba(0,0,0,0.75);
@@ -188,7 +202,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     signIn : () => dispatch(signInWithGoogle()),
-
+    signInFb : () => dispatch(signInWithFb()),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login);

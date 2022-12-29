@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth,GoogleAuthProvider,signInWithPopup } from "firebase/auth";
+import { getAuth,GoogleAuthProvider,signInWithPopup,FacebookAuthProvider } from "firebase/auth";
 import {SET_USER, SET_LOADING_STATUS, GET_ARTICLES} from "./actions/actionType";
 import { getStorage, ref,uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getDocs, getFirestore, } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore"; 
 import { query, orderBy } from "firebase/firestore";  
+
 
 
 
@@ -27,10 +28,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const storage = getStorage(app);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 const provider = new GoogleAuthProvider();
-
+const providerFb = new FacebookAuthProvider();
 
 export const setUser = (payload) => ({
   type: SET_USER,
@@ -58,6 +59,17 @@ export  default function signInWithGoogle () {
      
   }
 }
+export function signInWithFb () {
+  return (dispatch) => {
+    signInWithPopup(auth,providerFb)
+    .then((payload)=>{
+      dispatch(setUser(payload.user));
+    })
+    .catch((error) => alert(error.message));
+     
+  }
+}
+
 
 export function getUserAuth() {
     return (dispatch) => {

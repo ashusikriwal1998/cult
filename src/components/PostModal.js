@@ -177,6 +177,7 @@ const Header = styled.div`
         min-width: auto;
         color: rgba(0,0,0,0.15);
         pointer-events: none;
+        
     }
 
 `;
@@ -221,9 +222,12 @@ const SharedCreation = styled.div`
 const AssetButton = styled.button`
     display: flex;
     align-items: center;
+    background: transparent;
+        border: none;
     img{
         height: 24px;
         width: 24px;
+        
     }
     
     

@@ -5,8 +5,17 @@ import { connect } from "react-redux";
 import { getArticlesAPI } from "../firebase.js";
 import ReactPlayer from "react-player";
 
+
+
 const Main = (props) =>{
-    const[showModal,setShowModal]= useState("close");
+    const [showModal,setShowModal]= useState("close");
+    const [like, setLike] = useState(0);
+
+    const incLike = () => {
+        setLike(like+1);
+        
+    }
+    
 
     useEffect(()=>{
         props.getArticles()
@@ -38,10 +47,10 @@ const Main = (props) =>{
             <ShareBox>
             <div>
                 { props.user && props.user.photoURL ? (<img src={props.user.photoURL} alt=""/> ) : (<img src="/images/user.svg" alt="" /> ) }
-                <button onClick={handleClick} disabled={props.loading ? true : false}>Start a post</button>
+                <button onClick={handleClick} disabled={props.loading ? true : false}>Click here to post</button>
             </div>
             <div>
-                <button>
+                {/* <button >
                     <img src="/images/photo-icon.svg" alt="" />
                     <span>Photo</span>
                 </button>
@@ -49,9 +58,9 @@ const Main = (props) =>{
                 <button>
                     <img src="/images/Video-icon.svg" alt="" />
                     <span>Video</span>
-                </button>
+                </button> */}
 
-                <button>
+                {/* <button>
                     <img src="/images/Event-icon.svg" alt="" />
                     <span>Event</span>
                 </button>
@@ -59,7 +68,7 @@ const Main = (props) =>{
                 <button>
                     <img src="/images/article-icon.svg" alt="" />
                     <span>Write article</span>
-                </button>
+                </button> */}
             </div>
             </ShareBox>
             
@@ -68,7 +77,6 @@ const Main = (props) =>{
                     props.loading && <img src="/images/spin-loader.svg" alt="" />
                 }
            {props.articles.length >0 &&  props.articles.map((article,key)=>(
-            console.log(article),
                 <Article key={key}>
                     <SharedActor>
                         <a>
@@ -98,20 +106,20 @@ const Main = (props) =>{
                         <li>
                             <button>
                                 <img src="/images/like.svg" alt="" />
+                                <span>{like}</span>
                                 <img src="/images/clap.svg" alt="" />
-                                <span>
-                                    
-                                </span>
+                               <span>{article.data.comments}</span>
+                                
+                               
                             </button>
                         </li>
-                        <li>
-                            <a>{article.data.comments}</a>
-                        </li>
+                        
                     </SocialCounts>
 
                     <SocialActions>
-                        <button>
+                        <button onClick={incLike}>
                             <img src="/images/like.svg" alt="" />
+                           
                             <span>Like</span>
                         </button>
 
@@ -155,6 +163,10 @@ const CommanCard = styled.div`
     position: relative;
     border: none;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
+    box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);   
 
 `;
 
@@ -163,7 +175,11 @@ const ShareBox = styled(CommanCard)`
     flex-direction: column;
     color: #958b7b;
     margin: 0 0 8px;
-    background: white;
+    border-radius: 15px;
+    box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
      div{
         button{
             outline: none;
@@ -218,8 +234,6 @@ const Article = styled(CommanCard)`
     padding: 0;
     margin: 0 0 8px;
     overflow: visible;
-   
-
 `;
 
 const SharedActor = styled.div`
@@ -365,7 +379,7 @@ const Content  = styled.div`
     text-align: center;
     &>img{
         width: 30px;
-
+        background: transparent;
     }
 `;
 

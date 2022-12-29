@@ -4,15 +4,18 @@ import './index.css';
 import App from './App';
 import {Provider} from "react-redux";
 import store from "./store";
+import { AppProvider } from './components/context';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <AppProvider>
   <React.StrictMode>
   <Provider store={store}>
     <App />
   </Provider>
   </React.StrictMode>
+  </AppProvider>
 );
 
 // If you want to start m easuring performance in your app, pass a function

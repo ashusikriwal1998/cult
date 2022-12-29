@@ -8,14 +8,14 @@ const Leftside = (props) =>{
             <UserInfo>
                 <CardBackground/>
                 <a>
-                    <Photo/>
+                    <Photo>
+                    { props.user && props.user.photoURL ? (<img src={props.user.photoURL} alt=""/> ) : (<img src="/images/user.svg" alt="" /> ) }
+                    </Photo>
                     <Link>Welcome, {props.user ?props.user.displayName : "there!"}</Link>
                 </a>
-                <a>
-                    <AddPhotoText>Add a photo</AddPhotoText>
-                </a>
+                
             </UserInfo>
-            <Widget>
+            {/* <Widget>
                 <a> 
                     <div>
                         <span>Connections</span>
@@ -23,11 +23,11 @@ const Leftside = (props) =>{
                     </div>
                     <img src="/images/widget-icon.svg" alt="" />
                 </a>
-            </Widget>
+            </Widget> */}
             <Item>
                 <span>
                     <img src="/images/item-icon.svg" alt="" />
-                    My items
+                    {props.user && props.user.email   }
                 </span>
             </Item>
          </ArtCard>
@@ -55,6 +55,7 @@ const ArtCard = styled.div`
     position: relative;
     border: none;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
+    
 `;
 
 const UserInfo = styled.div`
@@ -62,31 +63,43 @@ const UserInfo = styled.div`
     padding: 12px 12px 16px;
     word-wrap: break-word;
     word-break: break-word;
+    
 
 `;
 
 const CardBackground = styled.div`
-    background: url("/images/card-bg.svg");
+    background: url("/images/grnd.svg");
     background-position: center;
     background-size: 462px;
     height: 54px;
     margin: -12px -12px 0;
+    
 `;
 
 const Photo = styled.div`
     box-shadow: none;
-    background-image: url("/images/photo.svg");
-    width: 72px;
-    height: 72px;
+    width: 150px;
+    height: 150px;
     box-sizing: border-box;
     background-clip: content-box;
     background-color: white;
     background-position: center;
     background-size: 60%;
     background-repeat: no-repeat;
-    border: 2px solid white;
+    border: 1px solid white;
     margin: -38px auto 12px;
-    border-radius: 50%;
+    border-radius: 50px 15px 15px 15px;
+    box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+    
+    img{
+        width: 100%;
+        border-radius: 50px 15px 15px 15px;
+        padding: 0;
+        margin: 0;
+    }
 
 `;
 

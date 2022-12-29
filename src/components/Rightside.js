@@ -1,6 +1,31 @@
 import styled from "styled-components";
+import {useState,useRef} from 'react';
 
 const Rightside = (props) =>{
+    const [state, setState] = useState("Follow");
+
+    const temp = useRef(null);
+
+    const refer = (e) =>{
+        e.preventDefault();
+        console.log(temp.current);
+    }
+    const change =(event)=>{
+        if(state=="Follow"){
+            setState("Following");
+            event.currentTarget.style.backgroundColor = 'blue';
+         event.currentTarget.style.color = 'white';
+
+        }
+        else {
+            setState("Follow");
+          
+            event.currentTarget.style.backgroundColor = 'transparent';
+            event.currentTarget.style.color = 'rgba(0,0,0,0.6)';
+        }
+    }
+
+
     return (
         <Container>
             <FollowCard>
@@ -15,8 +40,8 @@ const Rightside = (props) =>{
                             <Avatar/>
                         </a>
                         <div>
-                            <span>#Linkedin</span>
-                            <button>Follow</button>
+                            <span ref={temp}>#cult</span>
+                            <button onClick={change,refer} >{state}</button>
                         </div>
                     </li>
 
@@ -40,7 +65,7 @@ const Rightside = (props) =>{
             </FollowCard>
             <BannerCard>
             <img
-                src="https://static-exp1.licdn.com/scds/common/u/images/promo/ads/li_evergreen_jobs_ad_300x250_v1.jpg"
+                src=""
                 alt=""
             />
             </BannerCard>

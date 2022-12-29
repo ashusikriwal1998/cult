@@ -1,14 +1,18 @@
 import { connect } from "react-redux";
 import styled from "styled-components";
 import {signOutAPI} from "../firebase";
+import { Navigate,Link,useNavigate } from "react-router-dom";
 
 const Header = (props) =>{
+
+    const navigate =  useNavigate();
+      
     return (
         <Container>
             <Content>
                 <Logo>
                     <a href="/home">
-                        <img src="/images/home-logo.svg" alt="" />
+                        <img src="/images/logo.png" alt="" />
                     </a>
                 </Logo>
                 <Search>
@@ -28,24 +32,28 @@ const Header = (props) =>{
                             </a>
                         </NavList>
 
-                        <NavList>
+                        {/* <NavList>
                             <a>
                                 <img src="/images/nav-network.svg" alt="" />
                                 <span>My Network</span>
                             </a>
-                        </NavList>
+                        </NavList> */}
 
-                        <NavList>
+                        {/* <NavList>
                             <a>
                                 <img src="/images/nav-jobs.svg" alt="" />
                                 <span>Jobs</span>
                             </a>
-                        </NavList>
+                        </NavList> */}
 
                         <NavList>
-                            <a>
+
+                            <a onClick={() => navigate("/chat")}>
+                            {/* <Link to="/chat" className="btn btn-primary"> */}
                                 <img src="/images/nav-messaging.svg" alt="" />
                                 <span>Messaging</span>
+                            {/* </Link> */}
+                            
                             </a>
                         </NavList>
 
@@ -55,8 +63,14 @@ const Header = (props) =>{
                                 <span>Notifications</span>
                             </a>
                         </NavList>
+                        <NavList >
+                            <a >
+                                <img src="/images/sign-out.svg" onClick={()=>props.signOut()} />
+                                <span>Sign out</span>
+                            </a>
+                        </NavList>
 
-                        <User>
+                        {/* <User>
                             <a>
                                 {props.user && props.user.photoURL ? (<img src={props.user.photoURL} alt=""/> ): (<img src="/images/user.svg" alt="" />)}
                                 <span>
@@ -69,9 +83,9 @@ const Header = (props) =>{
                                     Sign Out
                                 </a>
                             </SignOut>
-                        </User>
+                        </User> */}
 
-                        <Work>
+                        {/* <Work>
                             <a>
                                 <img src="/images/nav-work.svg" alt="" />
                                 <span>
@@ -79,7 +93,7 @@ const Header = (props) =>{
                                     <img src="/images/down-icon.svg" alt="" />
                                 </span>
                             </a>
-                        </Work>
+                        </Work> */}
                    </NavListWrap>
                 </Nav>
             </Content>
@@ -87,7 +101,7 @@ const Header = (props) =>{
     );
 }
 const Container = styled.div`
-    background-color: white;
+    background-color: #ffffff;
     border-bottom: 1px solid rgba(0,0,0,0.08);
     left: 0;
     padding: 0 24px;
@@ -104,14 +118,22 @@ const Content = styled.div`
     max-width: 1128px;
 `;
 const Logo = styled.span`
-    margin-right: 8px;
+    margin-right: 24px;
     font-size: 0px;
+   a{
+    img{
+        max-width: 80px;
+    }
+   }
 `;
 
 const Search = styled.div`
     opacity: 1;
     flex-grow: 1;
     position: relative;
+    @media(max-width: 768px){
+        margin: 3px;
+    }
     &>div{
         max-width: 280px;
     }
@@ -119,7 +141,7 @@ const Search = styled.div`
             border: none;
             box-shadow: none;
             background-color: #eef3f8;
-            border-radius: 2px;
+            border-radius: 10px;
             color: rgba(0,0,0,0.9);
             width: 218px;
             padding: 0 8px 0 40px;
@@ -129,7 +151,7 @@ const Search = styled.div`
             height: 34px;
             border-color: #dce6f1;
             vertical-align: text-top;
-        }
+        }   
 `;
 
 const SearchIcon = styled.div`
@@ -161,6 +183,9 @@ const NavListWrap = styled.ul`
     display: flex;
     flex-wrap: nowrap;
     list-style-type: none;
+    @media(max-width: 768px){
+        justify-content: space-around;
+    }
     .active{
         span:after{
             content: "";
@@ -212,46 +237,46 @@ const NavList = styled.li`
              }
 `;
 
-const SignOut = styled.div`
-    position: absolute;
-    top: 45px;
-    background: white;
-    border-radius: 0 0 5px 5px;
-    width: 100px;
-    height: 40px;
-    font-size: 16px;
-    transition-duration: 1600ms;
-    text-align: center;
-    display: none;
-`;
+// const SignOut = styled.div`
+//     position: absolute;
+//     top: 45px;
+//     background: white;
+//     border-radius: 0 0 5px 5px;
+//     width: 100px;
+//     height: 40px;
+//     font-size: 16px;
+//     transition-duration: 1600ms;
+//     text-align: center;
+//     display: none;
+// `;
 
-const User = styled(NavList)`
-    a > svg {
-    width: 24px;
-    border-radius: 50%;
-  }
-    a>img{
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-    }
-    span{
-        display: flex;
-        align-items: center;
-    }
-    &:hover{
-        ${SignOut}{
-        align-items: center;
-        display: flex;
-        justify-content: center;
+// const User = styled(NavList)`
+//     a > svg {
+//     width: 24px;
+//     border-radius: 50%;
+//   }
+//     a>img{
+//         width: 24px;
+//         height: 24px;
+//         border-radius: 50%;
+//     }
+//     span{
+//         display: flex;
+//         align-items: center;
+//     }
+//     &:hover{
+//         ${SignOut}{
+//         align-items: center;
+//         display: flex;
+//         justify-content: center;
 
-        }
-    }
-`;
+//         }
+//     }
+// `;
 
-const Work = styled(User)`
-    border-left: 1px solid rgba(0,0,0,0.08);
-`;
+// const Work = styled(User)`
+//     border-left: 1px solid rgba(0,0,0,0.08);
+// `;
 
 const mapStateToProps = (state) => {
     return{
